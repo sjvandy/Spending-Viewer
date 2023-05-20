@@ -3,7 +3,7 @@
 import csv
 from decimal import *
 
-transaction_categories = []
+transaction_categories = {}
 total_spending = 0
 
 #Import Transactions
@@ -14,6 +14,7 @@ with open('transactions.csv') as transactions_csv:
         if row['Type'] == 'Purchase':
             #Create list of category transactions
             if row['Category'] not in transaction_categories:
-                transaction_categories.append(row['Category'])
+                transaction_categories[row['Category']] = 0
             total_spending += Decimal(row['Amount (USD)'])
-print(transaction_categories)
+            transaction_categories[row['Category']] += Decimal(row['Amount (USD)'])
+print(transaction_categories, total_spending)
