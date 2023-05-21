@@ -7,6 +7,7 @@ from decimal import *
 transactions_path = Path('transactions.csv')
 
 transaction_categories = {}
+category_percentage = {}
 total_spending = 0
 
 # Verifies transactions.csv is located in root folder
@@ -25,7 +26,9 @@ if transactions_path.is_file():
 else:
     print('transactions.csv not detected in folder, please add file, rename to "transactions.csv", then re-open the program.')                
 
-print(transaction_categories, total_spending)
 #Calculating Percentages of Spending
+for category, cost in transaction_categories.items():
+    category_percentage[category] = round((Decimal(cost)/Decimal(total_spending)) * 100, 2)
 
+print(category_percentage)
 
