@@ -10,8 +10,13 @@ transaction_categories = {}
 category_percentage = {}
 total_spending = 0
 
+# Terminal UI
+print('Welcome to the Apple Card Spending Tracker!')
+print('Here you can view what percentages you are spending in what categories on your Apple card.')
+
 # Verifies transactions.csv is located in root folder
 if transactions_path.is_file():
+    print("We've found your transactions! Calculating transactions...")
     # Import Transactions
     with open('transactions.csv') as transactions_csv:
         all_transactions = csv.DictReader(transactions_csv)
@@ -30,5 +35,9 @@ else:
 for category, cost in transaction_categories.items():
     category_percentage[category] = round((Decimal(cost)/Decimal(total_spending)) * 100, 2)
 
-print(category_percentage)
+#Summary
+print('Here is your monthly spending habits:')
+for category, percentage in category_percentage.items():
+    print(f'You spent {percentage}% on {category}')
+
 
